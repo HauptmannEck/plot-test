@@ -4,6 +4,8 @@ import budgetSummary from './budgetSummary';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import Highcarts3D from 'highcharts/highcharts-3d';
+import C3Chart from 'react-c3js';
+import 'c3/c3.css';
 
 Highcarts3D( Highcharts );
 
@@ -21,6 +23,23 @@ const pieChart = () => {
         values,
         labels,
         type: 'pie'
+    };
+};
+
+const pieChartC3 = () => {
+    const data = [];
+    const directExpenses = budgetSummary.expenses.filter( ( expense ) => expense.type === 'DIRECT' );
+
+    directExpenses.forEach( ( expense ) => {
+        data.push( [
+            expense.name,
+            expense.totals.find( ( item ) => item.year === 2017 && item.type === 'BUDGET' ).amount
+        ] );
+    } );
+
+    return {
+        columns: data,
+        type: 'pie',
     };
 };
 
@@ -182,6 +201,22 @@ class App extends Component {
                             highcharts={Highcharts}
                             options={directCompareHigh()}
                         />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-4">
+                        <C3Chart
+                            data={pieChartC3()}
+                            pie={{
+                                label: {
+                                    format: function ( value, ratio, id ) {
+                                        return value;
+                                    }
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="col-4">
                     </div>
                 </div>
             </div>
