@@ -2,8 +2,12 @@ import React from 'react';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import Highcarts3D from 'highcharts/highcharts-3d';
+import HighcartsExporting from 'highcharts/modules/exporting';
+import HighcartsExportingOffline from 'highcharts/modules/offline-exporting';
 import budgetSummary from "../budgetSummary";
 Highcarts3D( Highcharts );
+HighcartsExporting(Highcharts);
+HighcartsExportingOffline(Highcharts);
 
 const pieChartHigh = () => {
     const data = [];
@@ -20,6 +24,7 @@ const pieChartHigh = () => {
         credits: {
             enabled: false,
         },
+        export: {},
         chart: {
             type: 'pie',
             options3d: {
@@ -118,6 +123,8 @@ export const HighCharts = () => (
                 Very visually appealing.
                 Stock and Map style charts are extra cost.
                 Plugins available.
+                Allows Exporting to PDF, Print, PNG, JPG, and SVG.
+                Has a cloud editor for non-technical users.
             </p>
         </div>
         <div className="col-4">

@@ -53,6 +53,8 @@ export const PlotlyCharts = () => (
                 Easy to work with api, but limited examples and documentation.
                 Stock and Map style charts are included.
                 Python options are available so one report config can work in multiple systems.
+                Allows Exporting to PNG and cloud editor.
+                Has a cloud editor for non-technical users.
             </p>
         </div>
         <div className="col-4">
