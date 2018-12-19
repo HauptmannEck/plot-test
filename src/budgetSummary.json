@@ -1,0 +1,484 @@
+{
+  "revenue": [
+    {
+      "name": "Net Crop Sales",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 4758877
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 4180190
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 6043597
+        }
+      ]
+    },
+    {
+      "name": "Hedging Gain/Loss",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 12350
+        }
+      ]
+    },
+    {
+      "name": "Livestock Sales",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 50000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 52831
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 30000
+        }
+      ]
+    },
+    {
+      "name": "Crop Insurance Proceeds",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 309779
+        }
+      ]
+    },
+    {
+      "name": "Custom Hire Revenue",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 10000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 9873
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 10000
+        }
+      ]
+    },
+    {
+      "name": "Government Payments",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 5000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 5000
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 5000
+        }
+      ]
+    },
+    {
+      "name": "Other Income",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 5000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 3856
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 5000
+        }
+      ]
+    }
+  ],
+  "expenses": [
+    {
+      "name": "Seed",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 550000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 649968
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 715000
+        }
+      ]
+    },
+    {
+      "name": "Fertilizer",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 250000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 300005
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 325000
+        }
+      ]
+    },
+    {
+      "name": "Chemical",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 650000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 524240
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 800000
+        }
+      ]
+    },
+    {
+      "name": "Custom Application",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 300000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 281780
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 375000
+        }
+      ]
+    },
+    {
+      "name": "Fuel",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 105000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 160102
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 135000
+        }
+      ]
+    },
+    {
+      "name": "Repairs",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 250000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 295661
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 310000
+        }
+      ]
+    },
+    {
+      "name": "Labor",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 240000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 235956
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 300000
+        }
+      ]
+    },
+    {
+      "name": "Crop Insurance",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 225000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 21780
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 289125
+        }
+      ]
+    },
+    {
+      "name": "Irrigation",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 550000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 519108
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 710000
+        }
+      ]
+    },
+    {
+      "name": "Harvest Operations",
+      "type": "DIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 115000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 230558
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 150000
+        }
+      ]
+    },
+    {
+      "name": "Car and Truck Expenses",
+      "type": "INDIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 45000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 42146
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 45000
+        }
+      ]
+    },
+    {
+      "name": "Land Rent",
+      "type": "INDIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 163500
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 163500
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 310691
+        }
+      ]
+    },
+    {
+      "name": "Equipment Rent",
+      "type": "INDIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 80000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 210598
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 100000
+        }
+      ]
+    },
+    {
+      "name": "Supplies",
+      "type": "INDIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 30000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 39066
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 40000
+        }
+      ]
+    },
+    {
+      "name": "Utilities",
+      "type": "INDIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 65000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 38374
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 62341
+        }
+      ]
+    },
+    {
+      "name": "Insurance",
+      "type": "INDIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 24000
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 22179
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 30000
+        }
+      ]
+    },
+    {
+      "name": "Taxes",
+      "type": "INDIRECT",
+      "totals": [
+        {
+          "year": 2017,
+          "type": "BUDGET",
+          "amount": 1674
+        },
+        {
+          "year": 2017,
+          "type": "ACTUAL",
+          "amount": 140506
+        },
+        {
+          "year": 2018,
+          "type": "BUDGET",
+          "amount": 237395
+        }
+      ]
+    }
+  ]
+}
+
