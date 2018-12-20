@@ -4,21 +4,40 @@ import HighchartsReact from 'highcharts-react-official'
 import Highcarts3D from 'highcharts/highcharts-3d';
 import HighcartsExporting from 'highcharts/modules/exporting';
 import HighcartsExportingOffline from 'highcharts/modules/offline-exporting';
+import HighcartsDrilldown from 'highcharts/modules/drilldown';
 import budgetSummary from "../budgetSummary";
+
 Highcarts3D( Highcharts );
-HighcartsExporting(Highcharts);
-HighcartsExportingOffline(Highcharts);
+HighcartsExporting( Highcharts );
+HighcartsExportingOffline( Highcharts );
+HighcartsDrilldown(Highcharts);
 
 const pieChartHigh = () => {
-    const data = [];
-    const directExpenses = budgetSummary.expenses.filter( ( expense ) => expense.type === 'DIRECT' );
+    const drilldown = [];
 
-    directExpenses.forEach( ( expense ) => {
-        data.push( {
+    budgetSummary.expenses.forEach( ( expense ) => {
+        const expenseGroup = drilldown.find( ( section ) => section.id === expense.type );
+
+        const item = {
             y: expense.totals.find( ( item ) => item.year === 2017 && item.type === 'BUDGET' ).amount,
             name: expense.name,
-        } )
+        };
+
+        if ( expenseGroup ) {
+            expenseGroup.data.push( item );
+        } else {
+            drilldown.push( {
+                id: expense.type,
+                data: [ item ],
+            } );
+        }
     } );
+
+    const totals = drilldown.map( ( group ) => ( {
+        y: group.data.reduce( ( acc, expense ) => acc + expense.y, 0 ),
+        name: group.id,
+        drilldown: group.id,
+    } ) );
 
     return {
         credits: {
@@ -37,7 +56,7 @@ const pieChartHigh = () => {
             text: 'Direct Expenses'
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            pointFormat: '<b>{point.y}</b>'
         },
         plotOptions: {
             pie: {
@@ -53,17 +72,16 @@ const pieChartHigh = () => {
                 label: {
                     enabled: true,
                 },
-                events: {
-                    click: function ( e ) {
-                        alert( `CLICKED ${e.point.name}` )
-                    }
-                }
             }
         },
         series: [ {
             type: 'pie',
-            data: data
-        } ]
+            name: 'Expenses',
+            data: totals
+        } ],
+        drilldown: {
+            series: drilldown,
+        }
     };
 };
 const directCompareHigh = () => {
@@ -111,33 +129,57 @@ const directCompareHigh = () => {
     };
 };
 
-export const HighCharts = () => (
-    <div className="row">
-        <div className="col-12">
-            <h2>Highcharts</h2>
-            <p>
-                A non-D3 charting library, that is used with a paid license.
-                Many config options allowing much control over style and display.
-                Anything not in the config is not possible though.
-                Allows usage of HTML and SVG in formatting of labels.
-                Very visually appealing.
-                Stock and Map style charts are extra cost.
-                Plugins available.
-                Allows Exporting to PDF, Print, PNG, JPG, and SVG.
-                Has a cloud editor for non-technical users.
-            </p>
-        </div>
-        <div className="col-4">
-            <HighchartsReact
-                highcharts={Highcharts}
-                options={pieChartHigh()}
-            />
-        </div>
-        <div className="col-4">
-            <HighchartsReact
-                highcharts={Highcharts}
-                options={directCompareHigh()}
-            />
-        </div>
-    </div>
-);
+export class HighCharts extends React.Component {
+    chart;
+
+    constructor( props ) {
+        super( props );
+
+        this.grabChart = this.grabChart.bind( this );
+        this.printChart = this.printChart.bind( this );
+    }
+
+
+    grabChart( chart ) {
+        this.chart = chart;
+    }
+
+    printChart() {
+        this.chart.exportChartLocal();
+    }
+
+    render() {
+        return (
+            <div className="row">
+                <div className="col-12">
+                    <h2>Highcharts</h2>
+                    <p>
+                        A non-D3 charting library, that is used with a paid license.
+                        Many config options allowing much control over style and display.
+                        Anything not in the config is not possible though.
+                        Allows usage of HTML and SVG in formatting of labels.
+                        Very visually appealing.
+                        Stock and Map style charts are extra cost.
+                        Plugins available.
+                        Allows Exporting to PDF, Print, PNG, JPG, and SVG.
+                        Has a cloud editor for non-technical users.
+                    </p>
+                    <button onClick={this.printChart}>Print</button>
+                </div>
+                <div className="col-4">
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={pieChartHigh()}
+                        callback={this.grabChart}
+                    />
+                </div>
+                <div className="col-4">
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={directCompareHigh()}
+                    />
+                </div>
+            </div>
+        );
+    }
+}
