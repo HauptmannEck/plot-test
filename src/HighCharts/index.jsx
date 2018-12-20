@@ -81,6 +81,9 @@ const pieChartHigh = () => {
         } ],
         drilldown: {
             series: drilldown,
+            drillUpButton: {
+                relativeTo: 'spacingBox'
+            }
         }
     };
 };
@@ -108,8 +111,8 @@ const directCompareHigh = () => {
             type: 'column',
             options3d: {
                 enabled: true,
-                alpha: 0,
-                beta: 45
+                alpha: 5,
+                beta: 5
             }
         },
         title: {
