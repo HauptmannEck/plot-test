@@ -1,6 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 import budgetSummary from "../budgetSummary";
+import cashFlow from "../cashFlow";
 
 const pieChart = () => {
     const values = [];
@@ -42,6 +43,36 @@ const directCompare = () => {
         name: 'Actual'
     } ];
 };
+const cashFlowPoly = () => {
+    const x = [];
+    const yCashIn = [];
+    const yCashOut = [];
+    const yCashNet = [];
+
+    cashFlow.forEach( ( expense ) => {
+        x.push( expense.month );
+        yCashIn.push( expense.cashIn );
+        yCashOut.push( expense.cashOut );
+        yCashNet.push( expense.cashIn - expense.cashOut );
+    } );
+
+    return [ {
+        x,
+        y: yCashIn,
+        type: 'scatter',
+        name: 'Cash In'
+    }, {
+        x,
+        y: yCashOut,
+        type: 'scatter',
+        name: 'Cash Out'
+    }, {
+        x,
+        y: yCashNet,
+        type: 'scatter',
+        name: 'Net Cash Flow'
+    } ];
+};
 
 export const PlotlyCharts = () => (
     <div className="row">
@@ -55,6 +86,7 @@ export const PlotlyCharts = () => (
                 Python options are available so one report config can work in multiple systems.
                 Allows Exporting to PNG and cloud editor.
                 Has a cloud editor for non-technical users.
+                Does not have Drilldown functionality.
             </p>
         </div>
         <div className="col-4">
@@ -75,6 +107,30 @@ export const PlotlyCharts = () => (
                     height: 500,
                     barmode: 'group',
                     title: 'Budget vs Actual 2017'
+                }}
+            />
+        </div>
+        <div className="col-4">
+            <Plot
+                data={cashFlowPoly()}
+                layout={{
+                    width: 600,
+                    height: 500,
+                    title: 'Cash Flow 2017',
+                    yaxis: {
+                        zeroline: true,
+                        zerolinecolor: '#969696',
+                        zerolinewidth: 4,
+                    },
+                    xaxis: {
+                        tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        ticktext:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',  'Sep', 'Oct', 'Nov', 'Dec'],
+                    },
+                    legend: {
+                        orientation: "h",
+                        xanchor: 'left',
+                        yanchor: 'top'
+                    }
                 }}
             />
         </div>
