@@ -10,3 +10,17 @@ form {
     right: 10px;
     top: 10px;
 }
+.legends5 {
+    float:left;
+    margin-right: 1em;
+}
+.country-name {
+    margin: 0 !important;
+}
+.key-dot {
+    display: inline-block;
+    height: 10px;
+    margin-right: .5em;
+    width: 10px;
+}
+

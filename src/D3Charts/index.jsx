@@ -32,36 +32,24 @@ const pieChart = () => {
     return totals;
 };
 const directCompare = () => {
-    const x = [];
-    const yBudget = [];
-    const yActual = [];
     const directExpenses = budgetSummary.expenses.filter( ( expense ) => expense.type === 'DIRECT' );
 
-    directExpenses.forEach( ( expense ) => {
-        x.push( expense.name );
-        yBudget.push( expense.totals.find( ( item ) => item.year === 2017 && item.type === 'BUDGET' ).amount );
-        yActual.push( expense.totals.find( ( item ) => item.year === 2017 && item.type === 'ACTUAL' ).amount );
+    return directExpenses.map( ( expense ) => {
+        return {
+            name: expense.name,
+            Budget: expense.totals.find( ( item ) => item.year === 2017 && item.type === 'BUDGET' ).amount,
+            Actual: expense.totals.find( ( item ) => item.year === 2017 && item.type === 'ACTUAL' ).amount,
+        };
     } );
-
-    return [ {
-        x,
-        y: yBudget,
-        type: 'bar',
-        name: 'Budget'
-    }, {
-        x,
-        y: yActual,
-        type: 'bar',
-        name: 'Actual'
-    } ];
 };
 
 export class D3Charts extends React.Component {
     componentDidMount() {
-        this.drawChart();
+        this.drawPieChart();
+        this.drawBarChart();
     }
 
-    drawChart() {
+    drawPieChart() {
         const w = 400;
         const h = 400;
         const r = Math.min( w, h ) / 2;
@@ -96,7 +84,7 @@ export class D3Charts extends React.Component {
 
         const update = ( newData ) => {
             const paths = svg.selectAll( "path" )
-                .data( pie( newData ), (d) => d.data.name);
+                .data( pie( newData ), ( d ) => d.data.name );
 
             paths.exit().transition()
                 .duration( 1000 )
@@ -116,7 +104,7 @@ export class D3Charts extends React.Component {
 
             const restOfTheData = () => {
                 const text = svg.selectAll( 'text' )
-                    .data( pie( newData ), (d) => d.data.name);
+                    .data( pie( newData ), ( d ) => d.data.name );
                 text.exit().remove();
 
                 text.enter()
@@ -204,6 +192,119 @@ export class D3Charts extends React.Component {
         update( data );
     }
 
+    drawBarChart() {
+        const data = directCompare();
+        const svg = d3.select( "#d3-bar" )
+            .append( "svg" )
+            .attr( "height", 400 )
+            .attr( "width", 500 );
+        const x0 = d3.scaleBand()
+            .paddingInner( 0.1 );
+        const g = svg.append( "g" );
+
+        const xAxis = g.append( "g" )
+            .attr( "class", "axis" );
+
+        let marginBottom = 0;
+        x0.domain( data.map( function ( d ) {
+            return d.name;
+        } ) );
+        xAxis.call( d3.axisBottom( x0 ) )
+            .selectAll( "text" )
+            .each( function () {
+                if ( this.getBBox().width > marginBottom ) marginBottom = this.getBBox().width;
+            } );
+
+        const margin = { top: 30, right: 20, bottom: marginBottom, left: 40 };
+        const width = +svg.attr( "width" ) - margin.left - margin.right;
+        const height = +svg.attr( "height" ) - margin.top - margin.bottom;
+        g.attr( "transform", "translate(" + margin.left + "," + margin.top + ")" );
+
+        x0.rangeRound( [ 0, width ] );
+        xAxis.call( d3.axisBottom( x0 ) )
+            .selectAll( "text" )
+            .attr( "transform", "rotate(-45)" )
+            .style( "text-anchor", "end" );
+
+        const x1 = d3.scaleBand()
+            .padding( 0.2 );
+
+        const y = d3.scaleLinear()
+            .rangeRound( [ height, 0 ] );
+
+        const z = d3.scaleOrdinal()
+            .range( [ "#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00" ] );
+
+        const keys = [ 'Budget', 'Actual' ];
+        x1.domain( keys ).rangeRound( [ 0, x0.bandwidth() ] );
+        y.domain( [ 0, d3.max( data, function ( d ) {
+            return d3.max( keys, function ( key ) {
+                return d[ key ];
+            } );
+        } ) ] ).nice();
+
+
+        g.append( "g" )
+            .selectAll( "g" )
+            .data( data )
+            .enter().append( "g" )
+            .attr( "transform", function ( d ) {
+                return "translate(" + x0( d.name ) + ",0)";
+            } )
+            .selectAll( "rect" )
+            .data( function ( d ) {
+                return keys.map( function ( key ) {
+                    return { key: key, value: d[ key ] };
+                } );
+            } )
+            .enter().append( "rect" )
+            .attr( "x", function ( d ) {
+                return x1( d.key );
+            } )
+            .attr( "y", function ( d ) {
+                return y( d.value );
+            } )
+            .attr( "width", x1.bandwidth() )
+            .attr( "height", function ( d ) {
+                return height - y( d.value );
+            } )
+            .attr( "fill", function ( d ) {
+                return z( d.key );
+            } );
+
+        xAxis.attr( "transform", "translate(0," + height + ")" );
+
+        g.append( "g" )
+            .attr( "class", "axis" )
+            .call( d3.axisLeft( y ).ticks( null, "s" ) )
+            .append( "text" );
+
+        const legend = svg.append( "g" )
+            .attr( "font-family", "sans-serif" )
+            .attr( "font-size", 10 )
+            .attr( "text-anchor", "start" )
+            .selectAll( "g" )
+            .data( keys.slice().reverse() )
+            .enter().append( "g" )
+            .attr( "transform", function ( d, i ) {
+                return "translate(" + i * 60 + ", 0)";
+            } );
+
+        legend.append( "rect" )
+            .attr( "x", 15 )
+            .attr( "width", 15 )
+            .attr( "height", 15 )
+            .attr( "fill", z );
+
+        legend.append( "text" )
+            .attr( "x", 35 )
+            .attr( "y", 9.5 )
+            .attr( "dy", "0.32em" )
+            .text( function ( d ) {
+                return d;
+            } );
+    }
+
     render() {
         return (
             <div className="row">
@@ -214,7 +315,7 @@ export class D3Charts extends React.Component {
                 </div>
                 <div id="d3-pie" className="col-4">
                 </div>
-                <div className="col-4">
+                <div id="d3-bar" className="col-4">
                 </div>
             </div>
         );
