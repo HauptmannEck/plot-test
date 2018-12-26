@@ -122,6 +122,10 @@ const directCompareHigh = () => {
         xAxis: {
             type: 'category'
         },
+        tooltip: {
+            shared: true,
+            crosshairs: true
+        },
         plotOptions: {},
         series: [ {
             name: 'Budget',
