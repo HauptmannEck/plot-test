@@ -6,6 +6,7 @@ import HighcartsExporting from 'highcharts/modules/exporting';
 import HighcartsExportingOffline from 'highcharts/modules/offline-exporting';
 import HighcartsDrilldown from 'highcharts/modules/drilldown';
 import budgetSummary from "../budgetSummary";
+import cashFlow from "../cashFlow";
 
 Highcarts3D( Highcharts );
 HighcartsExporting( Highcharts );
@@ -53,7 +54,7 @@ const pieChartHigh = () => {
             }
         },
         title: {
-            text: 'Direct Expenses'
+            text: 'Expenses'
         },
         tooltip: {
             pointFormat: '<b>{point.y}</b>'
@@ -131,6 +132,86 @@ const directCompareHigh = () => {
         } ]
     };
 };
+const cashFlowHigh = () => {
+    const cashIn = [];
+    const cashOut = [];
+    const cashNet = [];
+
+    cashFlow.forEach( ( monthsData ) => {
+        cashIn.push( {
+            x: monthsData.month,
+            y: monthsData.cashIn,
+        } );
+        cashOut.push( {
+            x: monthsData.month,
+            y: monthsData.cashOut,
+        } );
+        cashNet.push( {
+            x: monthsData.month,
+            y: monthsData.cashIn - monthsData.cashOut,
+        } );
+    } );
+
+    return {
+        credits: {
+            enabled: false,
+        },
+        title: {
+            text: '2017 Cash Flow'
+        },
+        xAxis: {
+            labels: {
+                formatter: function() {
+                    return Highcharts.dateFormat('%b', new Date(2018, this.value - 1));
+                }
+            },
+            startOnTick: true,
+            tickAmount: 12
+        },
+        yAxis: {
+            plotLines: [{
+                color: '#C0C0C0',
+                width: 5,
+                value: 0
+            }]
+        },
+        legend: {
+            align: 'left',
+            verticalAlign: 'top',
+            borderWidth: 0
+        },
+        tooltip: {
+            shared: true,
+            crosshairs: true
+        },
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                marker: {
+                    lineWidth: 1
+                }
+            }
+        },
+
+        series: [{
+            name: 'Cash In',
+            color: '#42873c',
+            data: cashIn,
+        }, {
+            name: 'Cash Out',
+            color: '#872526',
+            data: cashOut
+        }, {
+            name: 'Net Cash Flow',
+            color: '#000000',
+            lineWidth: 4,
+            marker: {
+                radius: 4
+            },
+            data: cashNet
+        }]
+    };
+};
 
 export class HighCharts extends React.Component {
     chart;
@@ -180,6 +261,12 @@ export class HighCharts extends React.Component {
                     <HighchartsReact
                         highcharts={Highcharts}
                         options={directCompareHigh()}
+                    />
+                </div>
+                <div className="col-4">
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={cashFlowHigh()}
                     />
                 </div>
             </div>

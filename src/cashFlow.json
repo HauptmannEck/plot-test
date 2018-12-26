@@ -1,0 +1,49 @@
+[{
+  "month": 1,
+  "cashIn": 124538,
+  "cashOut": 273086
+}, {
+  "month": 2,
+  "cashIn": 500000,
+  "cashOut": 169439
+}, {
+  "month": 3,
+  "cashIn": 1105000,
+  "cashOut": 561891
+}, {
+  "month": 4,
+  "cashIn": 1001947,
+  "cashOut": 154150
+}, {
+  "month": 5,
+  "cashIn": 0,
+  "cashOut": 318930
+}, {
+  "month": 6,
+  "cashIn": 80000,
+  "cashOut": 361346
+}, {
+  "month": 7,
+  "cashIn": 0,
+  "cashOut": 315701
+}, {
+  "month": 8,
+  "cashIn": 285336,
+  "cashOut": 448250
+}, {
+  "month": 9,
+  "cashIn": 310336,
+  "cashOut": 293530
+}, {
+  "month": 10,
+  "cashIn": 911168,
+  "cashOut": 598039
+}, {
+  "month": 11,
+  "cashIn": 1185157,
+  "cashOut": 394450
+}, {
+  "month": 12,
+  "cashIn": 1055212,
+  "cashOut": 613968
+}]
