@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://HauptmannEck.github.io/plot-test",
   "dependencies": {
+    "d3": "^5.7.0",
     "gh-pages": "^2.0.1",
     "highcharts": "^7.0.1",
     "highcharts-react-official": "^2.0.0",

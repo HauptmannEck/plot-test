@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { PlotlyCharts } from './PlotlyCharts';
 import { HighCharts } from "./HighCharts";
 import { C3Charts } from "./C3Charts";
+import { D3Charts } from "./D3Charts";
 
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
                 <PlotlyCharts/>
                 <HighCharts/>
                 <C3Charts/>
+                <D3Charts/>
             </div>
         );
     }
